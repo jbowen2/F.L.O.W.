@@ -1,0 +1,15 @@
+{
+  "name": "flow",
+  "version": "1.0.0",
+  "description": "Discord Bot for the Yami discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John William Bowen",
+  "license": "",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "mysql": "^2.18.1"
+  }
+}
