@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 const { Message, Client, MessageEmbed } = require('discord.js');
-const { mysqlserver } = require('../../configs/config.json');
 module.exports = {
 	name: 'help',
 	description: 'tells user all commands',
