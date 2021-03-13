@@ -14,6 +14,4 @@ module.exports = (client) =>{
 		if(command.name) { client.commands.set(command.name, command); }
 		else { continue; }
 	}
-
-	console.log("All Prefix Commands Loaded"); //logs to the console that all commands were loaded sucesfuly
 };
