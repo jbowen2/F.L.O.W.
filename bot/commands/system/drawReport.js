@@ -49,7 +49,7 @@ module.exports = (message,redraw) =>{
                     }                          
                 }
                 //delays the report frombeing edited for 3 secs to allow the report to be writen
-                setTimeout( async function() { 
+                setTimeout( function() { 
                     if(redraw){
                         trackerPost.edit(report);
                     } else {
