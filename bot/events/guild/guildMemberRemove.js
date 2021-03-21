@@ -9,5 +9,5 @@ const drawReport = require('../../commands/system/drawReport');
  */
 module.exports = (client, member) => {
     con.query(`DELETE FROM user WHERE Discord_id = '${member.id}' AND guild_id = '${member.guild.id}'`,(err) => { if(err) throw err; });
-    setTimeout(drawReport, 3000);
+    setTimeout(drawReport(), 3000);
 }
