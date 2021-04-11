@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const { Client, Guild  } = require('discord.js');
+const { Client, Channel, Guild, Role, TextChannel } = require('discord.js');
 const con = mysql.createConnection(JSON.parse(process.env.MYSQLSERVER));
 /**
  * @description Emitted bot is added to server

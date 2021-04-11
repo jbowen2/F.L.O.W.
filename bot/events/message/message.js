@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const { Client, Message } = require('discord.js');
 const con = mysql.createConnection(JSON.parse(process.env.MYSQLSERVER));
+const { enablecheck } =  require('../../commands/system');
 /**
  * @description Emitted whenever a message is created
  * @author John W. Bowen
@@ -13,9 +14,9 @@ module.exports = (client, message) => {
 
 		const member = message.guild.members.resolve(message.author.id);
 
-		con.query(`SELECT * FROM guild WHERE guild_id = ${message.guild.id}`, async function(err, result) {
+		con.query(`SELECT * FROM guild WHERE guild_id = ${message.guild.id}`, async (err, result) => {
 			if(err) throw err;
-
+			if(!result[0]) return;
 			const prefix = await result[0].prefix;
 			const reportChannel = guild.channels.resolve(result[0].report_channel_id);
 			const progressChannel = guild.channels.resolve(result[0].progress_channel_id);
@@ -33,7 +34,7 @@ module.exports = (client, message) => {
 						console.error(error);
 						message.reply('there was an error trying to execute that command!');
 					}	
-				} else if(result[0].progress_channel_id && message.channel == progressChannel){
+				} else if(result[0].progress_channel_id && message.channel == progressChannel && enablecheck(guild)){
 					con.query(`
 						INSERT INTO users (Discord_id, Name, Vacation, has_posted)
 						VALUES ('${author.id}', '${author.displayName}', false, true)
@@ -45,9 +46,9 @@ module.exports = (client, message) => {
 						require('../../commands/system/drawReport')(message,true);
 					});
 				}
-			} else if( result[0].report_channel_id && message.channel == reportChannel){//runs when a new report is created
+			} else if( result[0].report_channel_id && message.channel == reportChannel && enablecheck(guild)){//runs when a new report is created
 				con.query(`INSERT INTO tracker (Message_id) VALUES ('${message.id}')`, function (err) { if (err) throw err; });
-			}
+			}		
 		});
 	}
 };
