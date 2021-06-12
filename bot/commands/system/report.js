@@ -52,7 +52,7 @@ function writeReport(date,guild){
  */
 function newProgressUpdate(message){
     const subquery =`SELECT message_id FROM report ORDER BY Created_at DESC WHERE guild_id = ${message.guild.id} LIMIT 1`;
-    con.query(`INSERT INTO message SET message_id='${message.id}', discord_id='${message.author.id}', report_id=(${subquery}), guild_id='${message.id}'`)
+    con.query(`INSERT INTO message SET message_id='${message.id}', discord_id='${message.author.id}', report_id IN (${subquery}), guild_id='${message.id}'`)
     con.query(`UPDATE user SET on_vacation = false, has_posted = true WHERE guild_id = '${message.guild.id}' AND discord_id = '${message.author.id}'`,(err)=>{if(err) throw err;})
     message.react('❌');
 }
