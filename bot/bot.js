@@ -16,7 +16,7 @@ client.commands = new Collection();
 client.events = new Collection();
 
 // For each Handler runs passing client
-['commands_handler', 'events_handler'].forEach(handler => { require(`./handlers/${handler}`)(client); });
+['command_handler', 'event_handler'].forEach(handler => { require(`./handler/${handler}`)(client); });
 
 // Logs the client in, establishing a websocket connection to Discord.
 client.login();
